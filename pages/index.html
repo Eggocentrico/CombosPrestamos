@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Prestamos</title>
+</head>
+<body>
+    <div class="main">
+        <h1 class="main-title">Pedir prestamo</h1>
+        <form action="submit" method="POST">
+            <label for="nombre">Nombre completo</label>
+            <input required type="text" name="nombre" id="nombre" placeholder="Su nombre aqui">
+            <label for="email">Direccion de correo</label>
+            <input required type="email" name="correo" id="correo" placeholder="Direccion de correo valida">
+            <label for="estimado">Tiempo en que estima entregar</label>
+            <input required type="date" id="estimado" name="trip-start"
+                value="2021-01-11"
+                min="2021-01-01" max="2030-12-31">
+            <label for="articulo">Articulo que desea prestar</label>
+            <select name="articulo" id="articulo">
+                <option value="1">Portatil-1</option>
+                <option value="2">Portatil-2</option>
+            </select>
+            <input type="submit" value="Pedir">
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo electronico</th>
+            <th>Tiempo estimado</th>
+            <th>Articulo</th>
+        </tr>
+        <tr>
+            <td>Jhonatan David</td>
+            <td>jhonatandaar@gmail.com</td>
+            <td>2021-02-13</td>
+            <td>Portatil-3</td>
+        </tr>
+    </table>
+</body>
+</html>
