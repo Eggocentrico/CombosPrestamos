@@ -6,21 +6,22 @@ head
   title Prestamos
 .main
   h1.main-title Pedir prestamo
-  form(action='submit' method='POST')
+  form.main_form(action='submit' method='POST')
     label(for='nombre') Nombre completo
     input#nombre(required='' type='text' name='nombre' placeholder='Su nombre aqui')
     label(for='email') Direccion de correo
-    input#correo(required='' type='email' name='correo' placeholder='Direccion de correo valida')
+    input#correo(type='email' name='correo' placeholder='Direccion de correo valida')
     label(for='estimado') Tiempo en que estima entregar
     input#estimado(required='' type='date' name='fecha' value='2021-01-11' min='2021-01-01' max='2030-12-31')
     label(for='articulo') Articulo que desea prestar
-    select#articulo(name='articulo')
+    input#articulo(list="browse" name="articulo" placeholder="Articulo a prestar (No llenar)")
+    datalist#browse
       each equipo, index in equiposNew
         if equipo == 'No disponible'
           option(value=index disabled) #{equipo}
         else
           option(value=index) #{equipo}
-    input(type='submit' value='Pedir')
+    input(type='submit' value='Pedir (No presionar)')
 table
   tr.first
     th Nombre
@@ -29,10 +30,17 @@ table
     th Tiempo estimado
     th Articulo
     th Aprobado
+    th Entregado
+    if admin
+      th Entrego?
+      th Se aprobo?
   each prestamo, index in prestamos  
     tr
         td #{prestamo.nombre}
-        td #{prestamo.correo}
+        if prestamo.correo
+            td #{prestamo.correo}
+        else
+            td No hay
         td #{prestamo.fechain}
         td #{prestamo.fecha}
         td #{equipos[prestamo.articulo]}
@@ -40,4 +48,14 @@ table
             td Si
         else
             td No
-    
+        if prestamo.entregado
+            td Si
+        else
+            td No
+        if admin
+          td
+            form(action="give/"+prestamo.id)
+              input(type="submit", value="Entrego?")
+          td
+            form(action="aprove/"+prestamo.id)
+              input(type="submit", value="Se aprobo?")

@@ -1,0 +1,14 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='index.css')
+  title Prestamos
+.main
+  h1.main-title Autenticar
+  form.main_form(action='auth' method='POST')
+    label(for='username') Usuario
+    input#username(required='' type='text' name='username' placeholder='Nombre de usuario')
+    label(for='password') Contraseña
+    input#password(type='password' name='password' placeholder='Contraseña')
+    input(type='submit' value='Autenticar')

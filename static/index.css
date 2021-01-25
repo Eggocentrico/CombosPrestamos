@@ -10,7 +10,7 @@ body, html, input, select, option {
     align-items: center;
 }
 
-form {
+.main_form {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
