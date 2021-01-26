@@ -9,6 +9,7 @@ head
     h1 Combos
   .links
     a(href="/loan") Pedir prestamo
+    a(href="/inventory") Inventario
     if !admin
       a(href="/auth") Autenticar
 .main
@@ -22,5 +23,8 @@ head
   .main_form
     form(action='loan' method='GET')
       input(type='submit' value='Hacer prestamos')
-    form(action='auth' method='GET')
-      input(type='submit' value='Autenticar')
+    form(action='inventory' method='GET')
+      input(type='submit' value='Inventario')
+    if !admin
+      form(action='auth' method='GET')
+        input(type='submit' value='Autenticar')

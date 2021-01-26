@@ -19,20 +19,20 @@ router.get('/', async (req, res) => {
 router.post('/submit', (req, res) => {
 	const actual = new Date().getTime();
 	const specified = new Date(req.body.fecha).getTime();
-	const computed = Math.floor((specified - actual) / (1000 * 60 * 60 * 24));
+	const computed = Math.ceil((specified - actual) / (1000 * 60 * 60 * 24));
 	if (!(computed <= -1)) {
 		const prestamo = new Prestamos({
 			nombre: req.body.nombre,
 			correo: req.body.correo,
 			fechain: new Date().toLocaleDateString(),
-			fecha: computed,
+			fecha: new Date(req.body.fecha).toLocaleDateString(),
 			articulo: req.body.articulo,
 			aprobado: false,
 			entregado: false
 		})
 		prestamo.save();
 	}
-	setTimeout(res.redirect, 1000, '/');
+	setTimeout(() => res.redirect('/loan'), 1000)
 })
 
 router.get('/aprove/:id', async (req, res) => {
@@ -42,7 +42,7 @@ router.get('/aprove/:id', async (req, res) => {
 			doc.save()
 		})
 	}
-	setTimeout(res.redirect, 1000, '/');
+	setTimeout(() => res.redirect('/loan'), 1000)
 })
 
 router.get('/give/:id', async (req, res) => {
@@ -52,7 +52,7 @@ router.get('/give/:id', async (req, res) => {
 			doc.save()
 		})
 	}
-	setTimeout(res.redirect, 1000, '/');
+	setTimeout(() => res.redirect('/loan'), 1000)
 })
 
 module.exports = router

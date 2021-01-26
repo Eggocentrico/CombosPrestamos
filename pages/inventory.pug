@@ -1,0 +1,77 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='index.css')
+  title Prestamos
+.head
+  a(href="/")
+    h1 Combos
+  .links
+    a(href="/loan") Pedir prestamo
+    if !admin
+      a(href="/auth") Autenticar
+.main
+  if admin
+    .header
+        h1.main-title Registrar equipo
+        .user
+          h3.username #{user}
+          form(action="/auth/signout" method='POST')
+            input(type="submit", value="Cerrar sesion")
+    form.main_form(action='inventory/submit' method='POST')
+      label(for='id') Id
+      input#id(required='' type='number' name='id' min=0 max=400 placeholder='Identificador (0-400)')
+      label(for='marca') Marca
+      input#marca(type='text' name='marca' placeholder='Marca del equipo')
+      label(for='modelo') Modelo
+      input#modelo(type='text' name='modelo' placeholder='Modelo del equipo')
+      label(for='estado') Estado
+      select#estado(name='estado')
+        option(value="Prestable en buen estado") Prestable en buen estado
+        option(value="Prestable") Prestable
+        option(value="Prestable en estado regular") Prestable en estado regular
+        option(value="Prestable en ultima instancia") Prestable en ultima instancia
+        option(value="No prestable") No prestable
+        option(value="Malo") Malo
+      label(for='tipo') Tipo
+      select#tipo(name='tipo')
+        option(value="Portatil") Portatil
+        option(value="Computador") Computador
+        option(value="Cable") Cable
+        option(value="Camara") Camara
+        option(value="VideoBeam") VideoBeam
+        option(value="Otro") Otro
+      label(for='calificacion') Calificacion
+      input#calificacion(required='' type='number' name='calificacion' min=0 max=10 placeholder='Calificacion del equipo (0-10)')
+      input(type='submit' value='Registrar equipo')
+.container
+  table.rwd-table
+    tr.first
+      th Id
+      th Marca
+      th Modelo
+      th Peticiones
+      th Estado
+      th Disponible
+      th Tipo
+      th Calificacion
+    each articulo, index in articulos  
+      tr
+          td(data-th="Id") #{articulo.id}
+          td(data-th="Marca") #{articulo.marca}
+          td(data-th="Modelo") #{articulo.modelo}
+          if articulo.peticiones.length > 0
+            td(data-th="Peticiones") 
+              ul
+                each peticion, index in peticiones
+                  li #{peticion.nombre} - #{peticion.estado}
+          else
+            td(data-th="Peticiones") Ninguna
+          td(data-th="Estado") #{articulo.estado}
+          if articulo.disponible
+            td(data-th="Disponible") Si
+          else
+            td(data-th="Disponible") No
+          td(data-th="Tipo") #{articulo.tipo}
+          td(data-th="Calificacion") #{articulo.calificacion}

@@ -8,7 +8,7 @@ head
   a(href="/")
     h1 Combos
   .links
-    a(href="/loan") Pedir prestamo
+    a(href="/inventory") Inventario
     if !admin
       a(href="/auth") Autenticar
 .main
@@ -19,7 +19,7 @@ head
         h3.username #{user}
         form(action="/auth/signout" method='POST')
           input(type="submit", value="Cerrar sesion")
-  form.main_form(action='submit' method='POST')
+  form.main_form(action='loan/submit' method='POST')
     label(for='nombre') Nombre completo
     input#nombre(required='' type='text' name='nombre' placeholder='Su nombre aqui')
     label(for='email') Direccion de correo
@@ -41,7 +41,7 @@ head
       th Nombre
       th Correo electronico
       th Fecha de solicitud
-      th Tiempo estimado
+      th Fecha estimada de entrega
       th Articulo
       th Aprobado
       th Entregado
@@ -56,7 +56,7 @@ head
           else
               td(data-th="Correo") No hay
           td(data-th="Fecha de solicitud") #{prestamo.fechain}
-          td(data-th="Tiempo estimado") #{prestamo.fecha}
+          td(data-th="Fecha estimada de entrega") #{prestamo.fecha}
           td(data-th="Articulo") #{equipos[prestamo.articulo]}
           if prestamo.aprobado
               td(data-th="Aprobado") Si
@@ -68,8 +68,8 @@ head
               td(data-th="Entregado") No
           if admin
             td(data-th="Entrego?")
-              form(action="give/"+prestamo.id)
+              form(action="loan/give/"+prestamo.id)
                 input(type="submit", value="Entrego?")
             td(data-th="Se aprobo?")
-              form(action="aprove/"+prestamo.id)
+              form(action="loan/aprove/"+prestamo.id)
                 input(type="submit", value="Se aprobo?")

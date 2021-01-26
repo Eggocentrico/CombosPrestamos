@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const authentication = require('./routers/auth/authentication');
 const authorization = require('./routers/auth/authorization');
 const loans = require('./routers/loans');
+const inventory = require('./routers/inventory');
 require('dotenv').config();
 
 // Utilities imports
@@ -23,15 +24,16 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.set('views', './pages');
 app.set('view engine', 'pug');
 
-// Landing page
-app.get('/', (req, res) => {
-	res.render('index.pug')
-})
-
 // Routers
 app.use('/auth', authorization);
 app.use(authentication);
 app.use('/loan', loans);
+app.use('/inventory', inventory);
+
+// Landing page
+app.get('/', (req, res) => {
+	res.render('index.pug', { admin: req.Authenticated, user: req.AuthenticatedUser })
+})
 
 // Constants
 const PORT = 80;

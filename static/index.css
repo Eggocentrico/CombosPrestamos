@@ -1,5 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap');
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='hsl(88,38%,15%)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  padding: 1rem;
+  padding-right: 2rem;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
+}
+
 body, html {
   background-color: #fefae0;
   font-family: 'Montserrat', serif;
@@ -57,6 +84,34 @@ a:hover {
   margin-right: 1em;
 }
 
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user > * {
+  padding: .3em;
+}
+
+.user > form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user > form > input {
+  margin-top: 0;
+  color: #283618;
+  background-color: #606c38;
+  padding: .4em;
+  border: 3px solid #222e14;
+}
+
+.user > h3 {
+  text-transform: capitalize;
+}
+
 .main_form {
   border-radius: 0 0 .8em .8em;
   background-color: #dda15e;
@@ -84,7 +139,7 @@ a:hover {
   margin-bottom: 2em;
 }
 
-.main_form > input {
+.main_form > input, select {
   background-color: #bc6c25;
   font-weight: 700;
   color: #dda15e;
@@ -143,6 +198,30 @@ input[type="submit"] {
   }
 }
  
+@media (max-width: 1200px) {
+  .user {
+    flex-direction: column;
+  }
+  .user > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .user > form > input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+  .header > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 /*Table*/
 .container {
   display: flex;
@@ -171,7 +250,7 @@ input[type="submit"] {
   padding-bottom: .5em;
 }
 .rwd-table td:before {
-  content: attr(data-th) ": ";
+  content: attr(data-th) ":  ";
   font-weight: bold;
   width: 6.5em;
   display: inline-block;
