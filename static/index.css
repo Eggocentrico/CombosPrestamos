@@ -1,138 +1,225 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap');
 
-body, html, input, select, option {
-    font-family: 'Fraunces', sherif;
+body, html {
+  background-color: #fefae0;
+  font-family: 'Montserrat', serif;
+  margin: 0;
+  padding: 0;
 }
 
-.main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.head {
+  background-color: #283618;
+  color: #605c38;
+  border-bottom: 3px solid #222e14;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4em;
+  margin-bottom: 1em;
+}
+
+.head > h1, a {
+  color: #606c38;
+  text-decoration: none; 
+}
+
+a:hover {
+  transition: .2s;
+  color: #8da04f;
+}
+
+.head:first-child {
+  padding-left: 1em;
+}
+
+.links {
+  padding-right: 2em;
+}
+
+.links > * {
+  padding: 1em;
+}
+
+.header {
+  background-color: #283618;
+  color: #606c38;
+  padding: .1em;
+  border-radius: .8em .8em 0 0;
+  border: 3px solid #222e14;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.header > * {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .main_form {
+  border-radius: 0 0 .8em .8em;
+  background-color: #dda15e;
+  border: 3px solid #bc6c25;
+  border-top: none;
+  display: flex;
+  padding: .1em;
+  padding-top: 1em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+.main_form > *:not(input[type="submit"]) {
+  width: 70%;
+}
+
+.main_form > *:not(label) {
+  margin-bottom: 1em;
+}
+
+.main_form:last-child {
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+.main_form > input {
+  background-color: #bc6c25;
+  font-weight: 700;
+  color: #dda15e;
+  padding: .5em;
+  border: 2px solid #ab5620;
+  border-radius: .6em
+}
+
+input[type="submit"] {
+  background-color: #bc6c25;
+  font-weight: 700;
+  color: #dda15e;
+  padding: .5em;
+  border: 2px solid #ab5620;
+  border-radius: .6em;
+  margin-top: 1em;
+  width: 30%;
+}
+
+.main_form > form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  width: 100%;
+}
+
+input[type="submit"] {
+  width: 100%;
+}
+
+.main_form > input[type="submit"] {
+  width: 50%;
+}
+
+.main_form > label {
+  margin-bottom: .3em;
+  color: #222e14;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 700px) {
+  .header {
+    width: 50%;
+  }
+  .main_form {
+    width: 50%;
+  }
+}
+ 
+/*Table*/
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rwd-table {
+  margin: 1em 0;
+  min-width: 300px;
+  border: 3px solid #bc6c25;
+  width: 90%;
+}
+.rwd-table th {
+  display: none;
+}
+.rwd-table td {
+  display: block;
+}
+.rwd-table td:first-child {
+  padding-top: .5em;
+}
+.rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+@media (min-width: 1200px) {
+  .rwd-table td:before {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  input[type="submit"] {
+    width: 50%;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-    padding: 1em;
-    width:98%;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-}
-
-form > input, select {
-    margin: .7em;
-    padding: .5em;
-}
-
-form > label {
-    font-weight: 400;
-}
-
-form > select {
-    background-color: #ececec;
-    border: solid 1px #dfdede
-}
-
-input[type="submit"], input[type="date"] {
-    background-color: #ececec;
-    border: solid 1px #dfdede;
-}
-
-.main-title {
-    font-weight: 600;
-    margin: 0;
-    padding: .625em;
-    text-align: center;
-}
-
-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    table-layout: fixed;
   }
-  
-  table caption {
-    font-size: 1.5em;
-    margin: .5em 0 .75em;
+}
+.rwd-table th, .rwd-table td {
+  text-align: left;
+}
+@media (min-width: 1200px) {
+  .rwd-table th, .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
   }
-  
-  table tr {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: .35em;
+  .rwd-table th:first-child, .rwd-table td:first-child {
+    padding-left: 0;
   }
-  
-  table th,
-  table td {
-    padding: .625em;
-    text-align: center;
+  .rwd-table th:last-child, .rwd-table td:last-child {
+    padding-right: 0;
   }
-  
-  table th {
-    font-size: .85em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+}
+.rwd-table {
+  background: #dda15e;
+  color: #222e14;
+  font-weight: 700;
+  border-radius: .8em;
+  overflow: hidden;
+}
+.rwd-table tr {
+  border-color: #222e14;
+}
+.rwd-table th, .rwd-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 1200px) {
+  .rwd-table th, .rwd-table td {
+    padding: 1em !important;
   }
-  
-  @media screen and (max-width: 600px) {
-
-    table th {
-      font-size: .5em;
-    }
-
-    .first {
-	display: flex;
-	flex-direction: column;
-    }
-
-    table {
-      border: 0;
-    }
-  
-    table caption {
-      font-size: 1.3em;
-    }
-    
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-    }
-    
-    table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-    }
-    
-    table td::before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    
-    table td:last-child {
-      border-bottom: 0;
-    }
-  }
+}
+.rwd-table th, .rwd-table td:before {
+  color: #bc6c25;
+}

@@ -1,0 +1,75 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='index.css')
+  title Prestamos
+.head
+  a(href="/")
+    h1 Combos
+  .links
+    a(href="/loan") Pedir prestamo
+    if !admin
+      a(href="/auth") Autenticar
+.main
+  .header
+    h1.main-title Pedir prestamo
+    if admin
+      .user
+        h3.username #{user}
+        form(action="/auth/signout" method='POST')
+          input(type="submit", value="Cerrar sesion")
+  form.main_form(action='submit' method='POST')
+    label(for='nombre') Nombre completo
+    input#nombre(required='' type='text' name='nombre' placeholder='Su nombre aqui')
+    label(for='email') Direccion de correo
+    input#correo(type='email' name='correo' placeholder='Direccion de correo valida')
+    label(for='estimado') Tiempo en que estima entregar
+    input#estimado(required='' type='date' name='fecha' min='2021-01-01' max='2030-12-31')
+    label(for='articulo') Articulo que desea prestar
+    input#articulo(list="browse" name="articulo" placeholder="Articulo a prestar (No llenar)")
+    datalist#browse
+      each equipo, index in equiposTemp
+        if equipo == 'No disponible'
+          option(value=index disabled) #{equipo}
+        else
+          option(value=index) #{equipo}
+    input(type='submit' value='Pedir (No presionar)')
+.container
+  table.rwd-table
+    tr.first
+      th Nombre
+      th Correo electronico
+      th Fecha de solicitud
+      th Tiempo estimado
+      th Articulo
+      th Aprobado
+      th Entregado
+      if admin
+        th Entrego?
+        th Se aprobo?
+    each prestamo, index in prestamos  
+      tr
+          td(data-th="Nombre") #{prestamo.nombre}
+          if prestamo.correo
+              td(data-th="Correo") #{prestamo.correo}
+          else
+              td(data-th="Correo") No hay
+          td(data-th="Fecha de solicitud") #{prestamo.fechain}
+          td(data-th="Tiempo estimado") #{prestamo.fecha}
+          td(data-th="Articulo") #{equipos[prestamo.articulo]}
+          if prestamo.aprobado
+              td(data-th="Aprobado") Si
+          else
+              td(data-th="Aprobado") No
+          if prestamo.entregado
+              td(data-th="Entregado") Si
+          else
+              td(data-th="Entregado") No
+          if admin
+            td(data-th="Entrego?")
+              form(action="give/"+prestamo.id)
+                input(type="submit", value="Entrego?")
+            td(data-th="Se aprobo?")
+              form(action="aprove/"+prestamo.id)
+                input(type="submit", value="Se aprobo?")

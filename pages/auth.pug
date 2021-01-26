@@ -4,8 +4,16 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   link(rel='stylesheet' href='index.css')
   title Prestamos
+.head
+  a(href="/")
+    h1 Combos
+  .links
+    a(href="/loan") Pedir prestamo
+    if !admin
+      a(href="/auth") Autenticar
 .main
-  h1.main-title Autenticar
+  .header
+    h1.main-title Autenticar
   form.main_form(action='auth' method='POST')
     label(for='username') Usuario
     input#username(required='' type='text' name='username' placeholder='Nombre de usuario')

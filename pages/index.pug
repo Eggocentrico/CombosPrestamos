@@ -3,59 +3,24 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   link(rel='stylesheet' href='index.css')
-  title Prestamos
+  title Combos
+.head
+  a(href="/")
+    h1 Combos
+  .links
+    a(href="/loan") Pedir prestamo
+    if !admin
+      a(href="/auth") Autenticar
 .main
-  h1.main-title Pedir prestamo
-  form.main_form(action='submit' method='POST')
-    label(for='nombre') Nombre completo
-    input#nombre(required='' type='text' name='nombre' placeholder='Su nombre aqui')
-    label(for='email') Direccion de correo
-    input#correo(type='email' name='correo' placeholder='Direccion de correo valida')
-    label(for='estimado') Tiempo en que estima entregar
-    input#estimado(required='' type='date' name='fecha' value='2021-01-11' min='2021-01-01' max='2030-12-31')
-    label(for='articulo') Articulo que desea prestar
-    input#articulo(list="browse" name="articulo" placeholder="Articulo a prestar (No llenar)")
-    datalist#browse
-      each equipo, index in equiposNew
-        if equipo == 'No disponible'
-          option(value=index disabled) #{equipo}
-        else
-          option(value=index) #{equipo}
-    input(type='submit' value='Pedir (No presionar)')
-table
-  tr.first
-    th Nombre
-    th Correo electronico
-    th Fecha de solicitud
-    th Tiempo estimado
-    th Articulo
-    th Aprobado
-    th Entregado
+  .header
+    h1.main-title Aplicativos
     if admin
-      th Entrego?
-      th Se aprobo?
-  each prestamo, index in prestamos  
-    tr
-        td #{prestamo.nombre}
-        if prestamo.correo
-            td #{prestamo.correo}
-        else
-            td No hay
-        td #{prestamo.fechain}
-        td #{prestamo.fecha}
-        td #{equipos[prestamo.articulo]}
-        if prestamo.aprobado
-            td Si
-        else
-            td No
-        if prestamo.entregado
-            td Si
-        else
-            td No
-        if admin
-          td
-            form(action="give/"+prestamo.id)
-              input(type="submit", value="Entrego?")
-          td
-            form(action="aprove/"+prestamo.id)
-              input(type="submit", value="Se aprobo?")
+      .user
+        h3.username #{user}
+        form(action="/auth/signout" method='POST')
+          input(type="submit", value="Cerrar sesion")
+  .main_form
+    form(action='loan' method='GET')
+      input(type='submit' value='Hacer prestamos')
+    form(action='auth' method='GET')
+      input(type='submit' value='Autenticar')
