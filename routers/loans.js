@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const equipos = require('../items');
 const { Prestamos } = require('../functions/mongoose');
 
@@ -13,6 +14,61 @@ router.get('/', async (req, res) => {
 			equiposTemp[prestamos[x].articulo] = 'No disponible';
 		}
 		res.render('loan.pug', {prestamos, equiposTemp, equipos, admin: req.Authenticated, user: req.AuthenticatedUser});
+	})
+})
+
+router.get('/api', async (req, res) => {
+	Prestamos.find().then((prestamos) => {
+		res.json(prestamos)
+	})
+})
+
+
+const jsonToCsv = (JSONData, ReportTitle, ShowLabel) => {
+	var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+	var CSV = 'sep=,' + '\r\n\n';
+	if (ShowLabel) {
+		var row = "";
+	for (var index in arrData[0]) {
+		row += index + ',';
+	}
+	row = row.slice(0, -1);
+	CSV += row + '\r\n';
+	}
+	for (var i = 0; i < arrData.length; i++) {
+		var row = "";
+		for (var index in arrData[i]) {
+			row += '"' + arrData[i][index] + '",';
+		}
+		row.slice(0, row.length - 1);
+		CSV += row + '\r\n';
+	}
+	var fileName = "MyReport_";
+	fileName += ReportTitle.replace(/ /g,"_");   
+	
+	fs.writeFile('./static/temp/' + fileName, CSV, function (err) {
+	  if (err) return console.log(err);
+	  console.log('saved!');
+	});
+}
+
+router.get('/csv', async (req, res) => {
+	Prestamos.find().then((prestamos) => {
+		let curedData = new Array();
+		for (let x = 0; x < prestamos.length; x++) {
+			curedData.push({
+				nombre: prestamos[x].nombre,
+				correo: prestamos[x].correo,
+				fechain: prestamos[x].fechain,
+				fecha: prestamos[x].fecha,
+				articulo: prestamos[x].articulo,
+				aprobado: prestamos[x].aprobado,
+				entregado: prestamos[x].entregado
+			})
+		}
+		console.log(curedData);
+		const data = jsonToCsv(curedData, 'Registro_de_prestamos', true);
+		res.send(data).end();
 	})
 })
 
