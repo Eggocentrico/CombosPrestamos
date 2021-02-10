@@ -28,16 +28,20 @@ input[type=number]
 }
 
 body, html {
-  background-color: #fefae0;
+  background-color: rgb(221, 227, 240);
   font-family: 'Montserrat', serif;
   margin: 0;
   padding: 0;
 }
 
 .head {
+  /*
   background-color: #283618;
   color: #605c38;
-  border-bottom: 3px solid #222e14;
+  */
+  background-color: #203885;
+  color: #fff;
+  border-bottom: 2px solid #203885;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,13 +50,23 @@ body, html {
 }
 
 .head > h1, a {
+  /*
   color: #606c38;
+  */
+  color: #fff;
   text-decoration: none; 
+}
+
+.head > h1 {
+  font-size: xx-large;
 }
 
 a:hover {
   transition: .2s;
+  /*
   color: #8da04f;
+  */
+  color: rgb(214, 214, 214);
 }
 
 .head:first-child {
@@ -68,11 +82,18 @@ a:hover {
 }
 
 .header {
+  /*
   background-color: #283618;
   color: #606c38;
+  */
+  background-color: #203885;
+  color: #fff;
   padding: .1em;
   border-radius: .8em .8em 0 0;
+  /*
   border: 3px solid #222e14;
+  */
+  border: 2px solid #182a63;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,6 +103,10 @@ a:hover {
 .header > * {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.header > h1 {
+  font-size: x-large;
 }
 
 .user {
@@ -103,9 +128,13 @@ a:hover {
 .user > form > input {
   margin-top: 0;
   color: #283618;
+  /*
   background-color: #606c38;
-  padding: .4em;
   border: 3px solid #222e14;
+  */
+  background-color: #fff;
+
+  padding: .4em;
 }
 
 .user > h3 {
@@ -114,8 +143,12 @@ a:hover {
 
 .main_form {
   border-radius: 0 0 .8em .8em;
+  /*
   background-color: #dda15e;
   border: 3px solid #bc6c25;
+  */
+  background-color: rgb(236, 236, 236);
+  border: 2px solid rgb(201, 201, 201);
   border-top: none;
   display: flex;
   padding: .1em;
@@ -140,20 +173,25 @@ a:hover {
 }
 
 .main_form > input, select {
+  /*
   background-color: #bc6c25;
-  font-weight: 700;
-  color: #dda15e;
-  padding: .5em;
   border: 2px solid #ab5620;
+  color: #dda15e;
+  */
+  background-color: #fff;
+  border: 2px solid rgb(224, 224, 224);
+  color: rgb(22, 22, 22);
+  font-weight: 700;
+  padding: .5em;
   border-radius: .6em
 }
 
 input[type="submit"] {
-  background-color: #bc6c25;
+  background-color: #203885;
   font-weight: 700;
-  color: #dda15e;
+  color: #fff;
   padding: .5em;
-  border: 2px solid #ab5620;
+  border: 2px solid #1b2f72;
   border-radius: .6em;
   margin-top: 1em;
   width: 30%;
@@ -283,7 +321,9 @@ input[type="submit"] {
 }
 .rwd-table {
   background: #dda15e;
-  color: #222e14;
+  color: #202020;
+  background-color: rgb(236, 236, 236);
+  border: 2px solid rgb(201, 201, 201);
   font-weight: 700;
   border-radius: .8em;
   overflow: hidden;
@@ -300,5 +340,5 @@ input[type="submit"] {
   }
 }
 .rwd-table th, .rwd-table td:before {
-  color: #bc6c25;
+  color: #203885;
 }

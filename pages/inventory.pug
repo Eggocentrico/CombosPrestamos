@@ -19,6 +19,8 @@ head
           h3.username #{user}
           form(action="/auth/signout" method='POST')
             input(type="submit", value="Cerrar sesion")
+          form(action="inventory/csv")
+            input(type="submit", value="Descargar CSV")
     form.main_form(action='inventory/submit' method='POST')
       label(for='id') Id
       input#id(required='' type='number' name='id' min=0 max=400 placeholder='Identificador (0-400)')
@@ -64,8 +66,8 @@ head
           if articulo.peticiones.length > 0
             td(data-th="Peticiones") 
               ul
-                each peticion, index in peticiones
-                  li #{peticion.nombre} - #{peticion.estado}
+                each peticion, index in articulo.peticiones
+                  li #{peticion.nombre} - #{peticion.entregado ? 'Entregado' : 'No entregado'}
           else
             td(data-th="Peticiones") Ninguna
           td(data-th="Estado") #{articulo.estado}
