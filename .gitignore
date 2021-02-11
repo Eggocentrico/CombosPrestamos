@@ -1,3 +1,4 @@
 node_modules
 static/temp/Inventario.xls
 static/temp/Registro_de_prestamos.xls
+.env
